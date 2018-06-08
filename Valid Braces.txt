@@ -1,0 +1,24 @@
+public class BraceChecker {
+    public static boolean isValid(String braces) {
+        int count = 0;
+        for(int i = 0; i < braces.length(); i++) {
+        if(braces.charAt(i) == '(' || braces.charAt(i) == '{' || braces.charAt(i) == '[')
+            count++;
+        if(braces.charAt(i) == ')' || braces.charAt(i) =='}' || braces.charAt(i) == ']') {
+            count--;
+            if(count < 0)
+                return false;
+        }
+            if(i != braces.length() - 1) {
+                if (braces.charAt(i) == '(' && braces.charAt(i + 1) == ']' || braces.charAt(i) == '{' && braces.charAt(i + 1) == ']')
+                    return false;
+                if (braces.charAt(i) == '{'&& braces.charAt(i + 1) == ')' || braces.charAt(i) == '[' && braces.charAt(i) == ')')
+                    return false;
+                if (braces.charAt(i) == '(' && braces.charAt(i + 1) == '}' || braces.charAt(i) == '[' && braces.charAt(i + 1) == '}')
+                    return false;
+            }
+        }
+        return count == 0;
+    }
+}
+// 4 kyu

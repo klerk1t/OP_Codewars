@@ -1,0 +1,22 @@
+char *DuplicateEncoder(char *arr)
+{
+  int wordLength = strlen(arr);
+  char result[wordLength];
+  int count = 0;
+  char tmp[strlen(arr)];
+  for(int i = 0; i <= wordLength; i++) {
+      tmp[i] = tolower(arr[i]);
+  }
+  for(int i = 0; i < wordLength; i++) {
+      count = 0;
+      for( int j = 0; j < wordLength; j++) {
+          if(tmp[i] == tmp[j]){
+              ++count;
+          }
+          if(count == 1) result[i] = '(';
+          else result[i] = ')';
+      }
+  }
+  return strdup(result);
+}
+// 6 kyu

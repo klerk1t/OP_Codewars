@@ -1,0 +1,106 @@
+public class TimeFormatter {
+    public static String formatDuration(long seconds) {
+        String qq[];
+        String result = "";
+        String year = "year";
+        String day = "day";
+        String hour = "hour";
+        String minute = "minute";
+        String second = "second";
+        String qw = ", ";
+        String s = "s";
+        String and = " and ";
+        long sec = seconds;
+        long oneYear = 31536000;
+        long oneDay = 86400;
+        int oneHour = 3600;
+        int oneMinute = 60;
+        int oneSecond = 1;
+        int count = 0;
+        long tmp;
+        long tmp1;
+        if(sec == 0)
+            return "now";
+        tmp = sec;
+        if(tmp / oneYear > 0) {
+            count++;
+            tmp1 = tmp / oneYear;
+            tmp -= tmp1 * oneYear;
+        }
+        if(tmp / oneDay > 0) {
+            count++;
+            tmp1 = tmp / oneDay;
+            tmp -= tmp1 * oneDay;
+        }
+        if(tmp / oneHour > 0) {
+            count++;
+            tmp1 = tmp / oneHour;
+            tmp -= tmp1 * oneHour;
+        }
+        if(tmp / oneMinute > 0) {
+            count++;
+            tmp1 = tmp / oneMinute;
+            tmp -= tmp1 * oneMinute;
+        }
+        if(tmp / oneSecond > 0)
+            count++;
+
+        if(sec / oneYear > 0) {
+            qq = format(sec, year, oneYear, qw, s, and, count);
+            result += qq[0];
+            count = Integer.parseInt(qq[2]);
+            sec = Long.parseLong(qq[1]);
+        }
+        if(sec / oneDay > 0) {
+            qq = format(sec, day, oneDay, qw, s, and, count);
+            result += qq[0];
+            count = Integer.parseInt(qq[2]);
+            sec = Long.parseLong(qq[1]);
+        }
+        if(sec / oneHour > 0) {
+            qq = format(sec, hour, oneHour, qw, s, and, count);
+            result += qq[0];
+            count = Integer.parseInt(qq[2]);
+            sec = Long.parseLong(qq[1]);
+        }
+        if(sec / oneMinute > 0) {
+            qq = format(sec, minute, oneMinute, qw, s, and, count);
+            result += qq[0];
+            count = Integer.parseInt(qq[2]);
+            sec = Long.parseLong(qq[1]);
+        }
+        if(sec /oneSecond > 0) {
+            qq = format(sec, second, oneSecond, qw, s, and, count);
+            result += qq[0];
+        }
+        return result;
+    }
+    
+    public static String[] format(long time, String val, long valTime, String qw, String s, String and, int count) {
+        String arr[] = new String[3];
+        String str = "";
+        long tmp;
+        tmp = time / valTime;
+        str += tmp + " " + val;
+        if(tmp > 1) {
+            str += s;
+        }
+        time -= tmp * valTime;
+        if(time == 0) {
+            arr[0] = str;
+        } else {
+            count--;
+            if(count == 1) {
+                str += and;
+            } else {
+                str += qw;
+            }
+        }
+        arr[0] = str;
+        arr[1] = String.valueOf(time);
+        arr[2] = String.valueOf(count);
+        return arr;
+    }
+
+}
+// 4 kyu

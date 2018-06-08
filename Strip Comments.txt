@@ -1,0 +1,22 @@
+public class StripComments {
+
+	public static String stripComments(String text, String[] commentSymbols) {
+  System.out.print(text);
+        for(String x : commentSymbols) {
+            while(text.indexOf(x) != -1) {
+                if(text.indexOf("\n", text.indexOf(x)) == -1) {
+                    text = text.substring(0, text.indexOf(x));
+                } else
+                text = text.substring(0, text.indexOf(x)) + text.substring(text.indexOf("\n", text.indexOf(x)));
+            }
+        }
+            if(text.indexOf(" \n") != -1) {
+                text = text.replace(" \n", "\n");
+            }
+            if(text.indexOf(" ", text.lastIndexOf("\n")) != -1)
+            text = text.substring(0, text.indexOf(" ", text.lastIndexOf("\n")));
+        return text;
+	}
+	
+}
+// 4 kyu
